@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 dir("${APP_DIR}") {
-                    git branch: 'main', url: 'https://github.com/etichiranjeevi/sample-nodejs.git'
+                    git branch: 'main', url: 'https://github.com/karriGopichand/sample-nodejs.git'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                         pm2 save
 
                         # Ensure PM2 restarts on reboot (systemd)
-                        pm2 startup systemd -u ubuntu --hp /home/ubuntu
+                        
                     '''
                 }
             }

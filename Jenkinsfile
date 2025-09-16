@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         APP_DIR = "/home/ubuntu/sample-nodejs"
-        APP_NAME = "sample-nodejs"   // PM2 process name (you can change if you want)
+        APP_NAME = "sample-nodejs"   // PM2 process name
     }
 
     stages {
@@ -33,8 +33,11 @@ pipeline {
                         # Start new instance with PM2
                         pm2 start ./bin/www --name $APP_NAME
 
-                        # Save PM2 state (so it survives reboot if needed)
+                        # Save PM2 process list
                         pm2 save
+
+                        # Ensure PM2 restarts on reboot (systemd)
+                        pm2 startup systemd -u ubuntu --hp /home/ubuntu
                     '''
                 }
             }
